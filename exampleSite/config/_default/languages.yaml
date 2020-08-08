@@ -1,0 +1,19 @@
+# Enabled Languages. 
+#
+# The keys should be ISO-639 language codes, as these will be used in metadata.
+# languageName: the name of a language in that language (see example for Russian)
+#
+# weight: a decimal number used for ordering languages in a list.
+# Lower weight = higher position. Use gapped numbering for easier inserts
+# (i.e. 10, 20, 30, ... ) as opposed to (1, 2, 3, ...)
+#
+# locale: a combination of ISO-639 language code and ISO-3166 country code
+# separated with underscore. Currently used only in og:locale meta tag.
+en:
+    languageName: English
+    weight: 10
+    locale: en_US
+ru:
+    languageName: Русский
+    weight: 20
+    locale: ru_RU

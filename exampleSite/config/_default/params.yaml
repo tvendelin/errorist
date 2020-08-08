@@ -1,0 +1,13 @@
+# The name of debugging configuration profile.
+# When hugo server is run with -e debug option, additional information
+# is shown on pages (template names, metaparameters, etc.)
+debug: debug
+
+# The directory for headless page bundles with images and their captions.
+# Path should be relative to <PROJECT DIR>/content
+image_bundle_dir: images
+
+# Default (site-wide) images for social sharing, don't forget to replace with yours
+# Path should be relative to <PROJECT DIR>/static
+images:
+#- '/img/errorist.png'

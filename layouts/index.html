@@ -1,0 +1,9 @@
+{{ define "main"}}
+    <div class="featured">
+        {{ partial "featured.html" . }}
+        <div class="front-page-content">
+        {{ .Content }}
+        </div>
+    </div>
+    {{ partial "featured-minor.html" . }}
+{{ end }}

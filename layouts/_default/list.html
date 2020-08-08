@@ -1,0 +1,24 @@
+{{ define "main" }}
+    <div class="main-list">
+        <h1>
+            {{ .Title }}
+        </h1>
+        {{ partial "main_img.html" . }}
+        {{ partial "content_cond.html" . }}
+        <ul class="list">
+        {{ range .Pages }}
+            <li>
+                <a href="{{ .Permalink }}">
+                    {{ .LinkTitle }}
+                </a>
+                {{ partial "list_description.html" . }}
+            </li>
+        {{ end }}
+        </ul>
+        {{- if eq  hugo.Environment .Site.Params.debug }}
+        <pre class="debug">
+        themes/errorist/layouts/_default/list.html
+        </pre>
+        {{ end -}}
+    </div>
+{{ end }}

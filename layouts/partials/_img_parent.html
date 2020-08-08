@@ -1,0 +1,13 @@
+{{ $img := partial "_main_img_map.html" . }}
+{{ if not $img }}
+{{ with .Parent }}
+{{ $img = partial "_main_img_map.html" . }}
+{{ else }}
+{{ with .Section }}
+{{ $img = partial "_main_img_map.html" . }}
+{{ else }}
+{{ end }}
+{{ end }}
+{{ end }}
+
+{{ return $img }}

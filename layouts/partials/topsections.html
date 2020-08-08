@@ -1,0 +1,50 @@
+<div class="grid-left">
+    {{- if and .IsPage .Params.Authors -}}
+    <nav class="menu" id="authors">
+        {{- partial "author.html" . -}}
+    </nav>
+    {{- end -}}
+    <nav class="menu" id="ndrop" itemscope itemtype="http://schema.org/SiteNavigationElement">
+        <meta itemprop="name" content="Main Navigation Menu">
+        {{ if .IsTranslated }}
+        <div class="section">
+            {{- i18n "languages" -}}
+        </div>
+
+        <ul class="link-list">
+        {{- range .Translations -}}
+        <li>
+            <a itemprop="url" href="{{ .Permalink }}">
+                {{- .Site.Language.LanguageName -}}
+            </a>
+        </li>
+        {{- end -}}
+        </ul>
+        {{- end -}}
+
+        <div class="section">
+            {{- i18n "all_sections" -}}
+        </div>
+
+        <ul class="link-list">
+        {{- range .Site.Sections -}}
+        <li><a itemprop="url"  href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
+        {{ end }}
+        {{- with .GetPage "/about" -}}
+        <li><a itemprop="url" href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
+        {{- end -}}
+        </ul>
+        <div class="section">
+            {{- i18n "lookby" -}}
+        </div>
+
+        <ul class="link-list">
+        {{- range $tname, $t := $.Site.Taxonomies -}}
+        {{- if ne $tname "exposures" -}}
+        <li><a itemprop="url" href="{{ "/" | relLangURL }}{{ $tname | urlize }}">{{ or (T $tname) $tname }}</a></li>
+        {{- end -}}
+        {{- end -}}
+        </ul>
+
+    </nav>
+</div>

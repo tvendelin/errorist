@@ -1,0 +1,25 @@
+{{ $s := .Site }}
+{{- $authors := partial "_author_map.html" . -}}
+
+{{- range $authors -}}
+{{ $id := index . "id" }}
+{{ $name:= or (index . "name") $id }}
+{{ $author_url := ( $s.GetPage ( print "/authors/" $id ) ).Permalink -}}
+<a href="{{ $author_url }}">
+    <div class="author" itemprop="author" id="author-{{ $id }}" itemscope itemtype="http://schema.org/Person">
+        <link href="{{ $author_url }}" rel="author">
+    {{ if $image_url := index . "image_url" }}
+    <figure>
+        <img src="{{ $image_url | absURL }}" alt="{{ index . "alt" }}" itemprop="image">
+    </figure>
+    {{- else -}}
+    <figure>
+        {{ partial "_mysterious_person.html" }}
+    </figure>
+    {{- end -}}
+    <div class="name" itemprop="name">
+        {{ or $name $id }}
+    </div>
+</div>
+</a>
+{{- end -}}

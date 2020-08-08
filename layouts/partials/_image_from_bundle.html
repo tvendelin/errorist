@@ -1,0 +1,22 @@
+{{- $link := "" -}}
+{{- $alt := "" -}}
+{{- $cap := "" -}}
+{{- $authors := slice -}}
+{{- $img_map := "" -}}
+
+{{- $r := index (first 1 ( .Resources.ByType "image" )) 0 -}}
+
+{{- if $r -}} 
+{{- $link = $r.Permalink -}}
+{{- $cap = or $cap ( chomp .RawContent | markdownify ) }}
+{{- $alt = chomp ( or .Params.alt .Plain .Name ) -}}
+{{- $authors = .Params.authors -}}
+{{- $id := partial "_image_id.html" $link -}}
+
+{{- $img_map = dict "link" $link "cap" $cap "alt" $alt "authors" $authors "klass" "main" "id" $id -}}
+
+{{- else -}}
+{{- errorf "THEME ERROR: Couldn't find any image in %s" .Path -}}
+{{- end -}}
+
+{{- return $img_map -}} 

@@ -1,0 +1,39 @@
+{{- define "main" -}}
+{{- $s := .Scratch -}}
+{{- partial "_seo_vars.html" . -}}
+{{- $type := $s.Get "type" -}}
+{{- $itemrefs := slice "meta-descr" "meta-published" "meta-modified" "meta-in-lang" -}}
+
+{{- range $s.Get "authors" -}}
+{{- $itemrefs = $itemrefs | append ( print "author-" ( index . "id" )) -}}
+{{- end -}}
+
+{{- $image_url := "" -}}
+{{-  with .Scratch.Get "image_url" -}}
+{{- $itemrefs = $itemrefs | append ( partial "_image_id.html" . ) -}}
+{{- end -}}
+
+{{- $published := $s.Get "published" -}}
+{{- $modified := $s.Get "modified" -}}
+
+<main class="main-single">
+    <article itemscope itemtype="http://schema.org/{{ $type }}" itemref="{{ delimit $itemrefs " " | safeHTMLAttr }}">
+        <meta itemprop="mainEntityOfPage" content="{{ .Permalink }}">
+            <h1 itemprop="headline">
+                {{- .Title -}}
+            </h1>
+            {{ partial "main_img.html" . }}
+            {{ partial "toc.html" . }}
+            {{ .Content }}
+            {{ partial "nextprev.html" . }}
+        {{- if eq  hugo.Environment .Site.Params.debug -}}
+        <pre class="debug">
+        themes/errorist/layouts/_default/single.html
+        </pre>
+        {{ end -}}
+            <div id="disqus_thread"></div>
+    </article>
+</main>
+{{- partial "disqus.html" . -}}
+{{- end -}}
+

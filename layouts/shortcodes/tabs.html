@@ -1,0 +1,30 @@
+{{- $tabName := .Get 0 }}
+{{- $active := " active" }}
+{{- $ext := "txt" }}
+
+{{- with .Get 1 }}{{ $ext = . }}{{ end -}}
+<div class="tab-block">
+    <div class="tabs-container">
+        <div class="tabs">
+            {{- range $i, $r :=  .Page.Resources.Match ( print $tabName "/*." $ext ) }}
+            {{- $baseName := partial "_tab_name.html" ( path.Base .Name ) }}
+            {{- if $i  }}{{ $active = "" }}{{ end -}}
+            <button class="tab {{ $tabName }}{{ $active }}" onClick="switchTab(event, '{{ replace .Name "/" "-" }}', '{{ $tabName }}')">
+                {{ with i18n $baseName }}{{ . }}{{ else }}{{ $baseName }}{{ end }}
+            </button>
+            {{- else -}}
+            {{ errorf "Tab sub-directory '%s' not found, but is referred to from '%s'" $tabName .Position -}}
+            {{- end -}}
+        </div>
+    </div>
+    {{ range $i, $r := .Page.Resources.Match ( print $tabName "/*." $ext ) }}
+    {{- $baseName := partial "_tab_name.html" ( path.Base .Name ) }}
+    {{ $display := "block" }}
+    {{- if $i }}{{ $display = "none" }}{{ end -}}
+    <div class="tabcontent {{ $tabName }}" id="{{ replace .Name "/" "-" }}" style="display: {{ $display }}">
+        {{ if (eq $ext "md") }}{{ .Content }}{{ else }}{{ .Content | markdownify }}{{ end }}
+    </div>
+    {{ end }}
+</div>
+
+

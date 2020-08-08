@@ -1,0 +1,64 @@
+{{- define "main" -}}
+{{- $ctx := . -}}
+{{- $author := dict }}
+{{- $id := replaceRE "^authors/([a-z]+)(/[^/]*md)?" "$1" .Path -}}
+
+{{- with index $.Site.Data "authors" -}}
+{{- with index . $id -}}
+{{- $author = . }}
+{{- end -}}
+{{- else -}}
+{{- warnf "No data/authors.(toml|yaml) was found." -}}
+{{- end -}}
+    <div class="main-list">
+        <div class="author-intro">
+            <h1>
+                {{ or .Title (index $author "name") $id }}
+            </h1>
+            <figure>
+            {{- with index $author "image" -}}
+                <img src="{{ .|absURL }}" alt="{{ or (T $id) $id }}">
+            {{- else -}}
+            {{ partial "_mysterious_person.html" }}
+            {{- end -}}
+            </figure>
+            <div class="bio">
+                {{ .Content }}
+            </div>
+            <div class="links">
+                <ul>
+                {{- with index $author "homepage" -}}
+                    <li>
+                        <a href="{{.}}">{{ (T "homepage") | default "Home page" }}</a>
+                    </li>
+                {{- end -}}
+
+                    {{- range index $author "social" -}}
+                    <li>
+                        <a href="{{ .url | safeURL}}" target="_blank" rel="noopener">{{ .name }}</a>
+                    </li>
+                    {{- end -}}
+                </ul>
+            </div>
+
+        </div>
+    {{- partial "main_img.html" . -}}
+        <ul class="list">
+        {{- range where .Pages "IsHome" false -}}
+        {{- if  not ( in .Parent.Params.authors $id ) -}}
+            <li>
+                <a href="{{- .Permalink -}}">
+                    {{- .LinkTitle -}}
+                </a>
+                {{ partial "list_description.html" . -}}
+            </li>
+        {{- end  }}
+        {{- end  }}
+        {{- if eq  hugo.Environment .Site.Params.debug -}}
+        <pre class="debug">
+        themes/errorist/layouts/authors/term.html
+        </pre>
+        {{- end -}}
+        </ul>
+    </div>
+{{- end -}}

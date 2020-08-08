@@ -1,0 +1,24 @@
+{{- $link := .Destination -}}
+{{- $alt := .Text -}}
+{{- $cap := .Title -}}
+{{- $author := "" -}}
+
+{{- if not (path.Ext .Destination) -}} 
+{{- $p :=  (print .Page.Site.Params.image_bundle_dir "/" .Destination "/index.md") -}}
+{{- with .Page.Site.GetPage $p -}} 
+{{- $r := index (first 1 ( .Resources.ByType "image" )) 0 -}}
+{{- if $r -}} 
+{{- $link = $r.Permalink -}}
+{{- $cap = or $cap .Content }}
+{{- $alt = or $alt ( chomp ( or .Plain .Name )) -}}
+{{- else -}}
+{{- errorf "Couldn't find any image for %s" .Path -}}
+{{- end -}}
+
+{{ else }}
+{{if ( not ( hasPrefix .Destination "http" )) }}
+{{- errorf "Couldn't find %s" $p -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- partial "figure.html" ( dict "link" $link "cap" $cap "alt" $alt "author" $author ) -}}

@@ -1,0 +1,24 @@
+{{ with .GetPage "exposures/minor" }}
+<div class="featured-minor">
+{{ range .Pages }}
+{{- with .FirstSection -}} 
+<a href="{{- .Permalink -}}" class="teaser-sec">
+    {{- .Title -}}
+</a>
+{{- end -}} 
+<a href="{{- .Permalink -}}" class="teaser">
+    <div class="sbox">
+        {{- .Scratch.Set "imageref" "minor-img" -}}
+        {{- $idata := partial "_main_img_map.html" . -}}
+        <figure>
+            <img src="{{ index $idata "link" }}" alt="{{ index $idata "alt"}}">
+        </figure>
+        <h2>
+            {{ .Title }}
+        </h2>
+        {{ partial "_get_summary.html" . }}
+    </div>
+</a>
+{{ end }}
+</div>
+{{ end }}

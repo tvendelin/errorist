@@ -1,0 +1,29 @@
+{{ $ctx := . }}
+{{ $sp := .Site.Data }}
+{{ $authors := slice }}
+
+{{ if $sp.authors }}
+{{ range $id := .Params.Authors }}
+{{ if isset $sp.authors $id }}
+{{ with index $sp.authors $id }}
+
+{{ $name := or (T $id) (index . "name") $id }}
+{{ $image_url := or (index . "image") "" }}
+{{ $authors = $authors | append ( dict "id" $id "name" $name "image_url" $image_url ) }}
+
+{{ else }}
+{{ $authors = $authors | append ( dict "id" $id ) }}
+{{ end }}
+
+{{ else }}
+{{ errorf "THEME ERROR: No author with ID %s mentioned in %s found under .Site.Data.authors" $id $ctx.Path }}
+{{ end }}
+
+{{ end }}
+
+{{ else }}
+{{ warnf "THEME WARNING: .Site.Data.authors undefined in project configuration" }}
+{{ end }}
+
+{{ return $authors }}
+

@@ -1,0 +1,25 @@
+{{ with .GetPage "exposures/major" }}
+{{- range .Pages  -}} 
+    {{- with .FirstSection -}} 
+    <a href="{{- .Permalink -}} " class="teaser-sec">
+        {{- .Title -}}
+    </a>
+    {{- end -}} 
+    <a href="{{- .Permalink -}} " class="teaser">
+        <div class="featured-item">
+            <h1>
+                {{- .LinkTitle -}}
+
+            </h1>
+            {{- .Scratch.Set "imageref" "major-img" -}}
+            {{- $idata := partial "_main_img_map.html" . -}}
+            {{- if $idata -}}
+            <figure>
+                <img src="{{ index $idata "link" }}" alt="{{ index $idata "alt"}}">
+            </figure>
+            {{- end }} 
+        {{ partial "_get_summary.html" . }}
+        </div>
+    </a>
+{{- end -}} 
+{{- end -}} 

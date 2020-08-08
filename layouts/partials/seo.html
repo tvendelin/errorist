@@ -1,0 +1,39 @@
+{{- $useless := partial  "_seo_vars.html" . -}}
+{{- $type := .Scratch.Get "type" -}}
+{{- $authors := .Scratch.Get "authors" -}}
+{{- $descr := .Scratch.Get "descr" -}}
+{{- $image := .Scratch.Get "image" -}}
+{{- $published := .Scratch.Get "published" -}}
+{{- $modified := .Scratch.Get "modified" -}}
+{{- $locale := .Scratch.Get "locale" -}}
+{{- $lang := .Scratch.Get "lang" -}}
+{{- $image_url := .Scratch.Get "image_url" -}}
+{{- $og_image_url := .Scratch.Get "og_image_url" -}}
+{{- $tags := .Scratch.Get "tags" -}}
+{{- $canonical := .Scratch.Get "canonical" -}}
+<meta property="og:type" content="article">
+
+<meta itemprop="name" property="og:title" content="{{ .Title }}">
+<meta id="meta-descr" itemprop="description" property="og:description" content="{{ $descr }}">
+<meta id="meta-published" itemprop="datePublished" {{ printf `content="%s"` $published | safeHTMLAttr }}>
+<meta id="meta-modified" itemprop="dateModified" {{ printf `content="%s"` $modified | safeHTMLAttr }}>
+<meta id="meta-in-lang" itemprop="inLanguage" content="{{ $lang }}">
+
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:locale" content="{{ $locale }}">
+<meta property="og:site_name" content="{{ .Site.Title }}">
+<meta property="og:image:alt" content="">
+
+<meta name="twitter:card" content="summary_large_image">
+{{ with $image }}
+<meta itemprop="image" property="og:image" content="{{ .link }}">
+<meta itemprop="primaryImageOfPage" itemref="{{ .id }}">
+{{- else -}}
+<meta itemprop="image" property="og:image" content="{{ $og_image_url }}">
+{{- end -}}
+
+{{- with $tags }}
+<meta id="meta-keywords" itemprop="keywords" content="{{ delimit . ", " }}">
+{{- end -}}
+
+<link rel="canonical" href="{{ $canonical }}">

@@ -1,0 +1,32 @@
+- id: languages
+  translation: Языки
+- id: "all_sections"
+  translation: "Разделы:"
+- id: lookby
+  translation: Критерии
+- id: authors
+  translation: Авторы
+- id: tags
+  translation: "Метки"
+- id: "prevTopic"
+  translation: "Предыдущая:"
+- id: "nextTopic"
+  translation: "Следующая:"
+- id: "homepage"
+  translation: "Домашняя страница"
+
+- id: "cookie_consent"
+  translation: "Мы используем cookie для аналитики и комментариев. Отказ от cookie делает комментарии недоступными."
+- id: "reject"
+  translation: "Отказаться"
+- id: "accept"
+  translation: "Согласиться"
+
+- id: "task"
+  translation: "задание"
+- id: "mysolution"
+  translation: "моё решение"
+- id: "solution"
+  translation: "ответ"
+- id: "diff"
+  translation: "исправления"

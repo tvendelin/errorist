@@ -1,0 +1,20 @@
+{{- if not .IsHome -}}
+{{- $sec := partial "_split_page_path.html" . -}}
+{{- $path := "/" }}
+<ol itemprop="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+<meta itemprop="name" content="Breadcrumbs">
+{{- range $c, $s := $sec -}}
+{{- $path = print $path $s  -}}
+{{- with $.Site.GetPage $path -}}
+{{- with .Parent -}}
+{{- $c = add $c 1 }}
+<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+    <a itemprop="item" href="{{ .Permalink }}">
+        <meta itemprop="position" content="{{$c}}">
+        <span itemprop="name" class="micro">{{ or .LinkTitle (T "home") "Home" }}</span></a>{{ if ne $c (len $sec) }}<span class="col">:</span>{{ end }}</li>
+{{- end -}}
+{{- end -}}
+{{- $path = print $path "/" -}}
+{{- end }}
+</ol>
+{{- end }}

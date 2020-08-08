@@ -1,0 +1,32 @@
+- id: languages
+  translation: Languages
+- id: "all_sections"
+  translation: "Sections:"
+- id: lookby
+  translation: Look by
+- id: authors
+  translation: "Authors"
+- id: tags
+  translation: "Tags"
+- id: "prevTopic"
+  translation: "Previous:"
+- id: "nextTopic"
+  translation: "Next:"
+- id: "homepage"
+  translation: "Home Page"
+
+- id: "cookie_consent"
+  translation: "We use third-party cookies for analytics and comments. Disabling cookies disables comments."
+- id: "reject"
+  translation: "Reject"
+- id: "accept"
+  translation: "Accept"
+
+- id: "task"
+  translation: "task"
+- id: "mysolution"
+  translation: "my solution"
+- id: "solution"
+  translation: "solution"
+- id: "diff"
+  translation: "corrections"

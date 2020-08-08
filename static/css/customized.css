@@ -1,0 +1,18 @@
+nav.top {
+    background-color: #900;
+}
+
+a.logo {
+    color: white;
+    text-transform: uppercase;
+}
+
+/*  On-hover behaviour for expandable pictures
+ *  included via markdown or as main-img image bundle.
+ *  See https://developer.mozilla.org/en-US/docs/Web/CSS/filter 
+ */
+figure.prominent img:hover {
+    filter: grayscale(100%) brightness(0.7);
+    cursor: pointer;
+}
+

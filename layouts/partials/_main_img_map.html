@@ -1,0 +1,24 @@
+{{- $ctx := . -}}
+
+{{- $img_map := "" -}}
+{{- $default_img := "main-img" -}}
+
+{{- $imageref := ( .Scratch.Get  "imageref" ) | default $default_img  -}} 
+{{- $m := .Resources.GetMatch $imageref -}}
+{{- $m = or $m ( .Resources.GetMatch $default_img ) -}}
+
+{{- if $m -}}
+
+{{- if $cont := chomp $m.Content -}}
+{{- $p := print .Site.Params.image_bundle_dir "/" $cont "/index.md" -}}
+{{- with .Site.GetPage $p -}} 
+{{ $img_map = partial "_image_from_bundle.html" . }}
+{{- else -}}
+{{- errorf "THEME ERROR: Couldn't find image bundle %q for page %q" $p $ctx.Path -}}
+{{- end -}}
+{{ else }}
+{{ errorf "THEME ERROR: Image reference file %s for %s is empty" $imageref $ctx.Path }}
+{{- end -}}
+{{- end -}}
+
+{{- return $img_map -}} 

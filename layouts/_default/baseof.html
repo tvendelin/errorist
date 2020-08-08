@@ -1,0 +1,41 @@
+{{- $pageType := "WebPage" -}}
+{{- if .IsHome -}}
+{{- $pageType := "WebSite" -}}
+{{- end -}}
+<!doctype html>
+<html lang="{{ .Language.Lang }}" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/{{ $pageType }}">
+    <head>
+        <meta name="description" content="{{.Description}}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/css/customized.css">
+        <script async src="/js/hamburger.js"></script>
+        {{ partial "head.html" . }}
+        {{ partial "seo.html" . }}
+        {{ partial "fonts.html" }}
+        {{ partial "favicons.html" }}
+    </head>
+    <body itemscope itemtype="http://schema.org/{{ $pageType }}">
+        <nav class="top">
+            <a href="javascript:void(0);" class="box-shadow-menu" onclick="menuDrop()" title="Menu"></a>
+            <a href="{{.Site.BaseURL}}" class="logo">
+                {{  .Site.Title }} 
+            </a>
+        </nav>
+        <div id="mobile-menu"></div>
+        <div class="page">
+            <nav class="breadcrumbs">
+                {{- partial "breadcrumbs.html" . -}}
+            </nav>
+            <div class="container">
+            {{- partial "topsections.html" . -}}
+            {{- block "main" . -}}
+            {{- end -}}
+            </div>
+        {{- partial "credits.html" . -}}
+        </div>
+        {{- partial "gdpr.html" . -}}
+        {{- partial "modal_img.html" -}}
+    </body>
+</html>

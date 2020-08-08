@@ -1,0 +1,34 @@
+{{- define "main" -}}
+{{- $s := .Scratch -}}
+{{- partial "_seo_vars.html" . -}}
+{{- $type := $s.Get "type" -}}
+{{- $itemrefs := slice "meta-descr" "meta-published" "meta-modified" "meta-in-lang" -}}
+
+{{- range $s.Get "authors" -}}
+{{- $itemrefs = $itemrefs | append ( print "author-" ( index . "id" )) -}}
+{{- end -}}
+
+{{- $image_url := "" -}}
+{{-  with .Scratch.Get "image_url" -}}
+{{- $itemrefs = $itemrefs | append ( partial "_image_id.html" . ) -}}
+{{- end -}}
+
+{{- $published := $s.Get "published" -}}
+{{- $modified := $s.Get "modified" -}}
+
+<div class="main-single">  
+    <h1>
+        {{- .Title -}}
+    </h1>
+        {{ partial "figure.html" ( partial "_image_from_bundle.html" . ) }}
+        {{ partial "nextprev.html" . }}
+    {{- if eq  hugo.Environment .Site.Params.debug -}}
+    <pre class="debug">
+    themes/errorist/layouts/_default/single.html
+    </pre>
+    {{ end -}}
+    <div id="disqus_thread"></div>
+</div>
+    {{- partial "disqus.html" . -}}
+{{- end -}}
+

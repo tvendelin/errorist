@@ -1,0 +1,16 @@
+<nav class="nextprev">
+{{ with .PrevInSection }}
+<p class="next">
+    <a href="{{ .Permalink }}">
+         {{ .LinkTitle }} &rarr;
+    </a>
+</p>
+{{ end }}
+{{ with .NextInSection }}
+<p class="prev">
+    <a href="{{ .Permalink }}">
+         &larr; {{ .LinkTitle }}
+    </a>
+</p>
+{{ end }}
+</nav>

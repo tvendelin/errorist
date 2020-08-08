@@ -1,0 +1,6 @@
+tag: tags
+author: authors
+
+# Responsible for showing content on the front page
+# Supported values: major, minor
+exposure: exposures

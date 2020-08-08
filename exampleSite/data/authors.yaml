@@ -1,0 +1,35 @@
+# The example authors. Replace with meaningful IDs and real names.
+#
+# The key under authors: is a unique identifier for an author.
+# The name: key should contain a fall-back name which will be displayed
+# should localized name be not defined. For adding localized names
+# edit the translation files for each configured language under
+# <PROJECT DIR>/i18n directory
+#
+# social: is a list of objects holding external URLs related to an author,
+# typically social network profiles. name: will be translated or displayed as-is 
+# depending on whether tranlation is provided under i18n directory.
+#
+# image: can be either local ( path should be relative to <PROJECT DIR>/static)
+# or an URL, as in example below
+#
+# homepage: is the primary external URL of an author
+#
+#authors:
+#    tatkins:
+#        name: 'Tommy Atkins'
+#    mmustermann:
+#        name: 'Max Mustermann'
+#        image: /img/mustermann.jpg
+#        homepage: http://example.com/dipl-ingeneur-informatiker/mmustermann
+#        social:
+#        - name: LinkedIn
+#          url: http://example.com/mmustermann
+#        - name: Xing
+#          url: http://example.net/mmustermann
+#    vpupkin:
+#        name: 'Vassily Pupkin'
+#        image: https://gravatar.com/avatar?d=mp&s=200
+#        homepage: http://example.com/vpupkin
+#    mysterious:
+

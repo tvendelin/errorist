@@ -1,0 +1,18 @@
+{{ define "main" }}
+    <div class="main-list">
+    {{- partial "content_cond.html" . -}}
+        <ul class="list-titles-only">
+        {{- range $term := .Data.Terms.ByCount -}}
+            <li>
+                <a href="{{ .Page.Permalink }}">{{ or ( T $term.Term ) .Page.LinkTitle }}</a> ({{ .Count }})
+            </li>
+        {{ end -}}
+        </ul>
+        {{- if eq  hugo.Environment .Site.Params.debug }}
+        <pre class="debug">
+        themes/errorist/layouts/_default/terms.html
+        </pre>
+        {{ end -}}
+    </div>
+{{ end -}}
+

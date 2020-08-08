@@ -1,0 +1,22 @@
+baseURL: "http://example.com"
+title: "Example.com"
+theme: "errorist"
+
+# This will optimize TAB-completion when using command line.
+# The Hugo default is content.
+contentDir: "kontent"
+
+# You might consider putting it outside the project directory
+publishDir: "publish"
+
+# This will enable adequate "dateModified" in metadata
+enableGitInfo: true
+
+# The parameters below are important if you publish code fragments
+pygmentsUseClasses: true
+pygmentscodefencesguesssyntax: true
+markup:
+    goldmark:
+        highlight:
+            codeFences: true
+            noClasses: false

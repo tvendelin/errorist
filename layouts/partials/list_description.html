@@ -1,0 +1,3 @@
+{{- with .Description -}}<p class="meta-description">{{ . }}</p>{{ end -}}
+{{- if eq hugo.Environment "dev" }}<p class="meta-description">{{- range .Params.Tags }}{{.}},{{end}}</p>{{ end -}}
+

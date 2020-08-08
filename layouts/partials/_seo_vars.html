@@ -1,0 +1,83 @@
+{{- $ctx := . -}}
+{{- $type := "Article" -}}
+{{- $descr := .Description -}}
+{{- $image_url := "" -}}
+{{- $authors := partial "_author_map.html" . }}
+{{- $lang := .Language.Lang }}
+{{- $locale := $lang }}
+{{ $tags := .Params.tags }}
+{{- $canonical := .Permalink -}}
+
+{{- with .Params.schema }}{{ with index . "type" }}{{ $type = . }}{{ end }}{{ end -}}
+
+{{- if and ( not $descr ) ( $ctx.IsPage ) -}}
+{{- with $ctx.Resources.GetMatch "summary.*md" -}}
+{{- $descr = . -}}
+{{- end -}}
+{{- end -}}
+
+{{- if not $descr -}}
+{{- with .Summary -}}
+{{- $descr := . -}}
+{{- else -}}
+{{- $descr = .Site.Home.Description -}}
+{{- end -}}
+{{- end -}}
+
+{{- $image := partial "_img_parent.html" . -}}
+
+{{ with $ctx.Params.Image }}
+{{ if fileExists . }}
+{{ $image_url = . }}
+{{ else }}
+{{ with $ctx.Site.GetPage ( print $ctx.Site.Params.image_bundle_dir "/" . "/index.md" ) }}
+{{ with partial "_image_from_bundle.html" . }}
+{{ with index . "link" }}
+{{ $image_url = . }}
+{{ else }}
+{{ errorf "Page %s references %s as main image, but the image doesn't exist" $ctx.Path . }}
+{{ end }}
+{{ end }}
+{{ end }}
+{{ end }}
+
+{{ else }}
+{{ with $image -}}
+{{ $image_url = index . "link" }}
+{{ end }}
+{{ end }}
+
+{{ $og_image_url := $image_url }}
+{{ if not $og_image_url }}
+{{ with .Site.Params.images }}
+{{ $og_image_url = index . 0 | absURL }}
+{{ end }}
+{{ end }}
+
+{{-  $ISO8601 := "2006-01-02T15:04:05-07:00" -}}
+{{- $published := .PublishDate.Format $ISO8601 -}}
+{{- $modified :=  .Lastmod.Format $ISO8601 -}}
+
+{{- with $.Site.Params.locale -}}
+{{- $locale = . -}}
+{{- end -}}
+
+{{ with .Params.canonical }}
+{{ $canonical = . | absURL }}
+{{- end -}}
+
+{{ $s := .Scratch }}
+{{ $s.Set "type" $type }}
+{{ $s.Set "authors" $authors }}
+{{ $s.Set "descr" $descr }}
+{{ $s.Set "image" $image }}
+{{ $s.Set "image_url" $image_url }}
+{{ $s.Set "og_image_url" $og_image_url }}
+{{ $s.Set "published" $published }}
+{{ $s.Set "modified" $modified }}
+{{ $s.Set "lang" $lang }}
+{{ $s.Set "locale" $locale }}
+{{ $s.Set "tags" $tags }}
+{{ $s.Set "canonical" $canonical }}
+
+{{ return }}
