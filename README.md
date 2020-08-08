@@ -4,7 +4,7 @@ Errorist is a website theme designed originally with foreign language students i
 
 That being said, you can build a ‘normal’ multilingual, multi-authored responsive website with Errorist. For that part, you will enjoy efficient and robust multilingual content management with minimal editing efforts. Thanks to the way the content is structured with Errorist, your Markdown files will also contain less code noise than usual.
 
-Finally, Errorist is a text-only theme – it doesn’t include a single image of its own. That puts your content – articles, photos, videos, graphs – into the spotlite.
+Finally, Errorist is a text-only theme – it doesn’t include a single image of its own. That puts your content – articles, photos, videos, graphs – into the spotlight.
 
 
 ## Install
