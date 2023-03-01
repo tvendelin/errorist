@@ -10,9 +10,11 @@
     <div class="sbox">
         {{- .Scratch.Set "imageref" "minor-img" -}}
         {{- $idata := partial "_main_img_map.html" . -}}
+        {{- if $idata -}}
         <figure>
             <img src="{{ index $idata "link" }}" alt="{{ index $idata "alt"}}">
         </figure>
+        {{- end -}}
         <h2>
             {{ .Title }}
         </h2>
