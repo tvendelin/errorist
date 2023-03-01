@@ -1,7 +1,7 @@
 {{ $summary := .Summary }}
 
 {{ if .IsPage }}
-{{- with .Resources.GetMatch "summary.md" -}} 
+{{- with .Resources.GetMatch "summary*.md" -}} 
 {{ $summary = .Content }}
 {{ end }}
 {{ else }}
