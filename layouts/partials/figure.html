@@ -2,6 +2,7 @@
 {{- $link := index . "link" -}}
 {{- $id := partial "_image_id.html" $link -}}
 {{- $klass := index . "klass" -}}
+{{- $authors := index . "authors" -}}
 <figure class="prominent {{ $klass }}" id="{{ $id }}" itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
     <link itemprop="url" href="{{ $link }}" rel="preload" as="image"> 
     <img itemprop="image" src="{{ $link }}" alt="{{ index . "alt" }}" onclick="expandPic(event, 'expanded')">
