@@ -1,3 +1,9 @@
+{{- $path := ""}}
+{{- with .File -}}
+{{- $path = .Path }}
+{{- else -}}
+{{- $path = .Path }}
+{{- end -}}
 {{- define "main" -}}
 {{- $ctx := . -}}
 {{- $author := dict }}
