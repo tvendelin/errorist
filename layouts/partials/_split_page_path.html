@@ -1,2 +1,10 @@
-{{ return split (replaceRE "(.*)/_?index.*md" "$1" .Path) "/" }}
+{{/* This is used for generating breadcrumbs */}}
+{{ $path := "" }}
+{{ with .File }}
+    {{ $path = .Path }}
+    {{ return split (replaceRE "(.*)/_?index.*md" "$1" $path) "/" }}
+{{ else }}
+    {{ $path = .Path }}
+{{ end }}
+
 
